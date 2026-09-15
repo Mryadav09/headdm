@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+<title>DMFIRST REAL PANEL</title>
+<link href='https://fonts.googleapis.com/css2?family=Exo+2:wght@700;800;900&family=Orbitron:wght@700;900&family=Roboto+Condensed:wght@400;700&display=swap' rel='stylesheet'>
+<style>
+* { user-select: none; -webkit-tap-highlight-color: transparent; box-sizing: border-box; margin: 0; padding: 0; }
+
+/* PERFECT MOBILE SCREEN FULL-VIEW */
+html, body { width: 100vw; height: 100vh; height: 100dvh; background: #000; overflow: hidden; font-family: 'Roboto Condensed', sans-serif; margin: 0; padding: 0; }
+
+/* BACKGROUND WEBSITE IFRAME */
+.bg-iframe { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh; border: none; z-index: 1; display: none; }
+
+/* --------------------------------------
+   PREMIUM VIP LOGIN PAGE CSS
+-------------------------------------- */
+#login-screen {
+    position: fixed; inset: 0; z-index: 100000; width: 100vw; height: 100vh; height: 100dvh;
+    background-color: #020505;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+
+/* Glowing Tech Grid Background */
+.login-bg-grid {
+    position: absolute; inset: 0; z-index: 1;
+    background-image: 
+        linear-gradient(rgba(18,185,129,0.15) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18,185,129,0.15) 1px, transparent 1px);
+    background-size: 35px 35px;
+    background-position: center center;
+    animation: grid-pan 20s linear infinite;
+}
+.login-bg-grid::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at center, transparent 10%, #020505 85%);
+}
+@keyframes grid-pan {
+    0% { background-position: 0 0; }
+    100% { background-position: 35px 35px; }
+}
+
+/* Animated Glowing Orb behind Login Box */
+.login-glow-orb {
+    position: absolute; width: 250px; height: 250px;
+    background: #12b981; border-radius: 50%;
+    filter: blur(80px); opacity: 0.4; z-index: 2;
+    animation: orb-float 6s ease-in-out infinite alternate;
+}
+@keyframes orb-float {
+    0% { transform: translate(-30px, -30px) scale(0.8); background: #12b981; }
+    100% { transform: translate(30px, 30px) scale(1.2); background: #3ff0b0; }
+}
+
+/* Glassmorphism Premium Card */
+.login-box {
+    position: relative; z-index: 10; width: 85%; max-width: 340px;
+    background: rgba(6, 10, 11, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(63,240,176,0.3); border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 20px rgba(18,185,129,0.1);
+    padding: 40px 25px; text-align: center;
+}
+.login-box::before {
+    content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, #3ff0b0, transparent);
+    opacity: 0.8;
+}
+
+.login-content { position: relative; z-index: 2; }
+.login-box h2 {
+    font-family: 'Exo 2', sans-serif; color: #fff; font-size: 28px; letter-spacing: 4px;
+    margin-bottom: 5px; text-shadow: 0 0 15px rgba(63,240,176,0.8);
+}
+.login-box p {
+    color: #8ab4a5; font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: 3px; margin-bottom: 35px;
+}
+.input-wrapper { position: relative; width: 100%; margin-bottom: 25px; }
+.login-box input {
+    width: 100%; padding: 16px; background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(18,185,129,0.5); border-radius: 12px; color: #3ff0b0;
+    font-family: 'Orbitron', sans-serif; text-align: center;
+    font-size: 16px; outline: none; letter-spacing: 4px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8); transition: all 0.3s ease;
+}
+.login-box input:focus { 
+    border-color: #3ff0b0; box-shadow: 0 0 20px rgba(63,240,176,0.4), inset 0 0 10px rgba(0,0,0,0.8); 
+}
+.login-box input::placeholder { color: #2a5a4a; letter-spacing: 2px; }
+
+.login-btn {
+    width: 100%; padding: 16px; background: linear-gradient(135deg, #12b981 0%, #086b4a 100%);
+    border: 1px solid #3ff0b0; border-radius: 12px; color: #fff;
+    font-family: 'Exo 2', sans-serif; font-size: 16px; font-weight: 800; letter-spacing: 2.5px; cursor: pointer;
+    box-shadow: 0 5px 15px rgba(18,185,129,0.4), inset 0 2px 4px rgba(255,255,255,0.3); 
+    transition: all 0.2s ease;
+}
+.login-btn:active { transform: translateY(2px); box-shadow: 0 2px 5px rgba(18,185,129,0.4), inset 0 3px 6px rgba(0,0,0,0.4); }
+
+#error-msg { 
+    color: #f43f5e; font-size: 12px; margin-top: 15px; font-weight: bold; 
+    font-family: 'Orbitron', sans-serif; letter-spacing: 1px; min-height: 15px; 
+    text-shadow: 0 0 10px rgba(244,63,94,0.5);
+}
+
+
+/* --------------------------------------
+   AI PANEL THEME CSS
+-------------------------------------- */
+#yv-hud { --ink: #030705; --graphite: #12171a; --em: #12b981; --em-lit: #3ff0b0; --mint: #b8ffe4; --cyan: #4fe3f0; color: #d9e6ea; text-rendering: optimizeLegibility; pointer-events: auto; }
+
+#yv-hud { position: relative; width: 255px; height: auto; padding-bottom: 6px; display: flex; align-items: center; justify-content: center; margin: 0; cursor: grab; }
+#yv-hud:active { cursor: grabbing; }
+
+.yv-chassis { position: relative; width: 100%; border-radius: 18px; padding: 5px; background: linear-gradient(158deg,#3a464b 0%,#161c1f 18%,#0b0f11 52%,#161c1f 84%,#2c373b 100%); box-shadow: 0 1px 0 rgba(255,255,255,.16) inset, 0 -1px 0 rgba(0,0,0,.9) inset, 0 0 0 1px #05090a; }
+.yv-inner { position: relative; border-radius: 13px; background: linear-gradient(180deg,#060a0b 0%,#020505 58%,#040809 100%); box-shadow: 0 0 0 1px #000, 0 2px 6px rgba(0,0,0,.9) inset, 0 -1px 0 rgba(255,255,255,.06) inset; overflow: hidden; isolation: isolate; padding-bottom: 5px;}
+.yv-screw { position: absolute; width: 6px; height: 6px; border-radius: 50%; z-index: 4; background: radial-gradient(circle at 32% 28%,#8e9ea4,#3b4649 55%,#10171a); box-shadow: 0 0 0 1px #05090a,0 1px 1px rgba(255,255,255,.14); }
+.yv-screw.tl{top:6px;left:6px} .yv-screw.tr{top:6px;right:6px} .yv-screw.bl{bottom:6px;left:6px} .yv-screw.br{bottom:6px;right:6px}
+
+.yv-snake { position: absolute; inset: 0; border-radius: 18px; padding: 4px; pointer-events: none; -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; overflow: hidden; z-index: 10; }
+.yv-snake::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, transparent 65%, rgba(63,240,176,0.4) 85%, #3ff0b0 100%); animation: yv-spin 2.5s linear infinite; }
+@keyframes yv-spin { 100% { transform: rotate(360deg); } }
+
+.electric-line { position: absolute; width: 2.5px; height: 50%; background: #b8ffe4; box-shadow: 0 0 10px #b8ffe4, 0 0 20px #3ff0b0; z-index: 50; animation: electric-slide 1.5s infinite linear; pointer-events: none; border-radius: 2px; }
+.electric-line.left { left: 0; }
+.electric-line.right { right: 0; animation-delay: 0.75s; }
+@keyframes electric-slide { 0% { top: -50%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+
+.yv-head { position: relative; display: flex; align-items: center; gap: 4px; padding: 6px 5px 5px; background: linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,0) 45%), linear-gradient(180deg,#1d262a,#0c1214 70%,#070c0d); border-bottom: 1px solid #000; box-shadow: 0 1px 0 rgba(255,255,255,.07) inset,0 6px 12px -8px #000; pointer-events: none; }
+.yv-emblem { width: 26px; height: 26px; flex: 0 0 26px; display: block; filter: drop-shadow(0 0 4px rgba(18,185,129,.55)); }
+.yv-title { min-width: 0; flex: 1; pointer-events: none;}
+.yv-wordmark { display: block; font-family: 'Exo 2', sans-serif; font-size: 11px; font-weight: 900; line-height: 1.2; letter-spacing: .055em; text-transform: uppercase; background-image: linear-gradient(100deg,#6f8b86 0%,#cfe9e0 22%,#ffffff 34%,#b8ffe4 44%,#3ff0b0 56%,#9fd8c6 72%,#5d7a74 100%); -webkit-background-clip: text; color: transparent; }
+.yv-rule { position: relative; height: 1px; margin: 3px 0 2px; overflow: hidden; background: linear-gradient(90deg,rgba(63,240,176,.55),rgba(63,240,176,.12) 55%,transparent); }
+.yv-sub { display: flex; align-items: center; gap: 4px; font-size: 6px; letter-spacing: .24em; color: #7e969d; text-transform: uppercase; }
+.yv-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--em-lit); box-shadow: 0 0 5px var(--em); }
+.yv-meta { text-align: right; flex: 0 0 auto; pointer-events: none;}
+.yv-meta i { display: block; font-style: normal; font-size: 7px; letter-spacing: .09em; color: #7f9199; line-height: 1.4; white-space: nowrap; }
+.yv-meta i b { color: var(--cyan); font-weight: 600; text-shadow: 0 0 6px rgba(79,227,240,.4); }
+.yv-idbar { display: flex; align-items: center; gap: 5px; justify-content: flex-end; margin-top: 2px; }
+.yv-fleet { font-size: 7px; font-weight: 700; letter-spacing: .05em; color: var(--mint); white-space: nowrap; font-variant-numeric: tabular-nums; text-transform: uppercase; }
+.yv-strip { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 4px; margin: 4px 5px 0px; padding: 4px 6px; border-radius: 999px; background: repeating-linear-gradient(115deg,rgba(255,255,255,.03) 0 2px,transparent 2px 8px), linear-gradient(180deg,#080d0f,#020506); border: 1px solid #1f2a2d; box-shadow: 0 2px 5px rgba(0,0,0,.85) inset,0 1px 0 rgba(255,255,255,.07),0 0 9px -3px rgba(18,185,129,.45); pointer-events: none;}
+.yv-strip .yv-kv { font-size: 7.5px; font-weight: 700; letter-spacing: 0.05em; color: #dcece7; text-transform: uppercase; white-space: nowrap; font-variant-numeric: tabular-nums; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
+
+.yv-panel { position: relative; margin: 4px 5px 0; padding: 6px 6px 4px; border-radius: 12px; overflow: hidden; min-height: 130px; display: flex; flex-direction: column; justify-content: flex-end; background: radial-gradient(120% 90% at 50% 12%,rgba(18,185,129,.13),transparent 62%), linear-gradient(180deg,#040d0a,#010403 68%,#020806); border: 1px solid #1c2724; box-shadow: 0 3px 9px rgba(0,0,0,.9) inset,0 0 0 1px rgba(0,0,0,.6),0 1px 0 rgba(255,255,255,.06); pointer-events: none;}
+.yv-grid-bg { position: absolute; inset: 0; pointer-events: none; opacity: .3; background-image: linear-gradient(rgba(63,240,176,.16) 1px,transparent 1px), linear-gradient(90deg,rgba(63,240,176,.16) 1px,transparent 1px); background-size: 16px 16px; mask-image: radial-gradient(75% 70% at 50% 45%,#000 30%,transparent 100%); -webkit-mask-image: radial-gradient(75% 70% at 50% 45%,#000 30%,transparent 100%); z-index: 1;}
+
+.yv-smooth-snap { animation: yv-snap-in 0.3s cubic-bezier(0.1, 0.8, 0.2, 1) forwards; pointer-events: none;}
+@keyframes yv-snap-in { 0% { opacity: 0; transform: scale(0.95); } 100% { opacity: 1; transform: scale(1); } }
+
+/* HISTORY SCROLL & SCANNER */
+.yv-scan-box { position: absolute; inset: 0; overflow: hidden; z-index: 5; background: rgba(0,0,0,0.4); padding: 5px 15px; }
+.history-list { width: 100%; display: flex; flex-direction: column; animation: scroll-history 1.5s linear infinite; }
+.history-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-family: Arial, Helvetica, sans-serif; font-weight: 700; }
+.h-num { font-size: 20px; width: 30px; text-align: left; }
+.h-size { color: #ffffff; flex: 1; text-align: center; font-size: 14px; letter-spacing: 0.5px; opacity: 0.9; }
+.h-colors { display: flex; gap: 4px; width: 40px; justify-content: flex-end; align-items: center; }
+.h-dot { width: 10px; height: 10px; border-radius: 50%; }
+.bg-g { background: #12b981; } .bg-r { background: #f43f5e; } .bg-v { background: #d946ef; }
+.t-g { color: #12b981; } .t-r { color: #f43f5e; }
+.t-gv { background: linear-gradient(180deg, #12b981 48%, #d946ef 52%); -webkit-background-clip: text; color: transparent; }
+.t-rv { background: linear-gradient(180deg, #f43f5e 48%, #d946ef 52%); -webkit-background-clip: text; color: transparent; }
+
+.scanner-line { position: absolute; left: 0; right: 0; height: 3px; background: #b8ffe4; box-shadow: 0 0 10px #b8ffe4, 0 0 20px #3ff0b0; z-index: 20; animation: scan-up-down 1.2s ease-in-out infinite alternate; pointer-events: none; }
+@keyframes scroll-history { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+@keyframes scan-up-down { 0% { top: -2px; opacity: 0; box-shadow: 0 0 10px #b8ffe4, 0 0 20px #3ff0b0, 0 -25px 35px rgba(18,185,129,0.7); } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: calc(100% - 1px); opacity: 0; box-shadow: 0 0 10px #b8ffe4, 0 0 20px #3ff0b0, 0 25px 35px rgba(18,185,129,0.7); } }
+
+.yv-wave { position: absolute; left: 0; right: 0; top: 0; height: 112px; width: 100%; pointer-events: none; opacity: .65; z-index: 2;}
+.yv-wave path { animation: yv-flow 5.5s linear infinite; }
+.yv-wave path:nth-child(2) { animation-duration: 8s; animation-direction: reverse; }
+@keyframes yv-flow { to{stroke-dashoffset:-120} }
+.yv-sweep { position: absolute; left: 0; right: 0; height: 22px; top: -22px; pointer-events: none; background: linear-gradient(180deg,transparent,rgba(63,240,176,.16),transparent); animation: yv-sweep 5.5s cubic-bezier(.5,0,.5,1) infinite; z-index: 3;}
+@keyframes yv-sweep { 0%{top:-22px} 100%{top:105%} }
+.yv-mini { position: relative; z-index: 10; display: flex; align-items: flex-end; justify-content: space-between; gap: 6px; margin-top: auto;}
+.yv-mini-txt { min-width: 0; }
+.yv-mini-txt small { display: block; font-size: 6px; letter-spacing: .13em; color: #6d8a80; text-transform: uppercase; }
+.yv-mini-txt b { display: block; font-size: 9px; letter-spacing: .05em; color: var(--mint); margin-top: 2px; text-shadow: 0 0 5px rgba(63,240,176,0.4); }
+
+/* UNIQUE PROFESSIONAL PNG NUMBER ANIMATION */
+.yv-balls-wrap { position: absolute; top: 0; bottom: 24px; left: 0; right: 0; display: flex; align-items: center; justify-content: center; gap: 12px; z-index: 5; pointer-events: none; }
+.yv-ball { position: relative; display: flex; align-items: center; justify-content: center; background: transparent; }
+.yv-ball.small { width: 45px; height: 45px; }
+.yv-ball.big { width: 60px; height: 60px; z-index: 10; }
+
+.yv-ball img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; position: relative; z-index: 5; animation: levitate 3s ease-in-out infinite; border: 1.5px solid rgba(255,255,255,0.15); box-shadow: 0 4px 10px rgba(0,0,0,0.8); }
+.yv-ball.big img { animation-delay: 0.2s; border: 2px solid #3ff0b0; box-shadow: 0 0 15px rgba(63,240,176,0.6); }
+.yv-ball.small img { animation-delay: 0.5s; opacity: 0.85; }
+
+.yv-ball::after { content: ''; position: absolute; bottom: -12px; width: 60%; height: 5px; background: radial-gradient(ellipse at center, rgba(63,240,176,0.7) 0%, transparent 70%); border-radius: 50%; animation: base-shadow 3s ease-in-out infinite; z-index: 1; filter: blur(1px); }
+.yv-ball.big::after { bottom: -16px; width: 70%; animation-delay: 0.2s; background: radial-gradient(ellipse at center, rgba(79,227,240,0.7) 0%, transparent 70%); }
+.yv-ball.small::after { animation-delay: 0.5s; }
+
+.yv-ball::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; height: 85%; border-radius: 50%; background: #12b981; filter: blur(15px); opacity: 0.4; animation: energy-pulse 2s infinite alternate; z-index: 0; pointer-events: none; }
+.yv-ball.big::before { background: #4fe3f0; filter: blur(20px); width: 95%; height: 95%; }
+
+@keyframes levitate { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes base-shadow { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(0.6); opacity: 0.3; } }
+@keyframes energy-pulse { 0% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; } 100% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.6; } }
+
+.yv-info-row { position: relative; z-index: 2; display: flex; justify-content: space-between; gap: 6px; margin: 4px 5px 0; pointer-events: none;}
+.yv-info-box { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; padding: 5px 6px; border-radius: 8px; background: radial-gradient(120% 90% at 50% 12%,rgba(18,185,129,.05),transparent 62%), linear-gradient(180deg,#040d0a,#010403 68%,#020806); border: 1px solid #1c2724; overflow: hidden; box-shadow: 0 3px 9px rgba(0,0,0,.9) inset, 0 0 0 1px rgba(0,0,0,.6), 0 1px 0 rgba(255,255,255,.06); }
+.yv-info-box::before { content: ''; position: absolute; left: 0; top: 15%; bottom: 15%; width: 2px; background: #12b981; box-shadow: 0 0 6px #12b981; border-radius: 0 2px 2px 0; }
+.yv-info-box .ib-txt { display: flex; align-items: center; justify-content: center; }
+.yv-info-box .ib-txt b { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; color: #b8ffe4; text-shadow: 0 0 5px rgba(63,240,176,0.4); line-height: 1; white-space: nowrap; }
+
+.yv-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 6px 6px 6px; }
+.btn-green-premium { position: relative; display: flex; align-items: center; justify-content: center; padding: 10px; border-radius: 8px; cursor: pointer; background: linear-gradient(145deg, #12b981 0%, #086b4a 100%); border: 1px solid #3ff0b0; box-shadow: 0 5px 15px rgba(18,185,129,0.4), inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -3px 5px rgba(0,0,0,0.3); transition: all 0.2s ease; overflow: hidden; text-align: center; }
+.btn-green-premium:active { transform: translateY(2px); box-shadow: 0 2px 5px rgba(18,185,129,0.4), inset 0 3px 6px rgba(0,0,0,0.4); }
+.btn-green-premium::before { content: ''; position: absolute; top: 0; left: -100%; width: 40%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent); transform: skewX(-25deg); animation: premium-sweep 3s infinite cubic-bezier(0.4, 0, 0.2, 1); }
+.btn-green-premium .t { z-index: 2; display: flex; align-items: center; justify-content: center; pointer-events: none;}
+.btn-green-premium .t b { font-family: 'Exo 2', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 0.15em; color: #ffffff; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); line-height: 1; }
+@keyframes premium-sweep { 0% { left: -60%; } 50%, 100% { left: 160%; } }
+.btn-black-glass { position: relative; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px; border-radius: 8px; cursor: pointer; background: linear-gradient(145deg, #1a2220 0%, #0d1210 100%); border: 1px solid #2a3a35; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255,255,255,0.1), inset 0 -3px 5px rgba(0,0,0,0.4); transition: all 0.2s ease; text-align: center; }
+.btn-black-glass:active { transform: translateY(2px); box-shadow: 0 2px 5px rgba(0,0,0,0.6), inset 0 3px 6px rgba(0,0,0,0.6); background: #0a0d0c; }
+.btn-black-glass svg { width: 14px; height: 14px; flex: 0 0 14px; stroke: #a3a3a3; fill: none; stroke-width: 2.5; z-index: 2; transition: stroke 0.3s; pointer-events: none;}
+.btn-black-glass:hover svg { stroke: #fff; }
+.btn-black-glass .t { z-index: 2; display: flex; align-items: center; justify-content: center; pointer-events: none;}
+.btn-black-glass .t b { font-family: 'Exo 2', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: 0.15em; color: #d0d0d0; text-shadow: 0 1px 3px rgba(0,0,0,0.8); line-height: 1; transition: color 0.3s; }
+.btn-black-glass:hover .t b { color: #ffffff; }
+
+/* MINI ORB WITH PNG LOGO & DRAG CURSOR */
+#mini-wrapper { position: fixed; z-index: 99999; display: none; padding: 10px; }
+#yv-hud-orb { position: relative; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #0a1712; animation: pulse-border 2s infinite alternate; cursor: grab; pointer-events: auto; }
+#yv-hud-orb:active { cursor: grabbing; transform: scale(0.92); }
+#yv-hud-orb::before { content: ''; position: absolute; inset: -3px; border-radius: 50%; background: conic-gradient(#12b981 0deg, #3ff0b0 90deg, #12b981 180deg, #043d29 270deg, #12b981 360deg); animation: spin-cw 2s linear infinite; z-index: 1; }
+#yv-hud-orb::after { content: ''; position: absolute; inset: 0px; border-radius: 50%; background: #000; z-index: 2; }
+.mini-logo-img { width: 47px; height: 47px; border-radius: 50%; object-fit: cover; border: 2px solid #1a2a24; position: relative; z-index: 5; background: #000; pointer-events: none;}
+@keyframes pulse-border { 0% { box-shadow: 0 0 5px rgba(18,185,129,0.5), inset 0 2px 5px rgba(0,0,0,0.8); } 100% { box-shadow: 0 0 20px rgba(63,240,176,0.8), inset 0 2px 5px rgba(0,0,0,0.8); } }
+@keyframes spin-cw { 100% { transform: rotate(360deg); } }
+
+/* MAIN PANEL POSITION */
+#main-wrapper { position: fixed; z-index: 99999; display: none; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<!-- PREMIUM LOGIN SCREEN -->
+<div id="login-screen">
+    <div class="login-bg-grid"></div>
+    <div class="login-glow-orb"></div>
+    <div class="login-box">
+        <div class="login-content">
+            <h2>DMFIRST REAL PANEL</h2>
+            <p>SECURE ACCESS PROTOCOL</p>
+            <div class="input-wrapper">
+                <input type="password" id="passInput" placeholder="ENTER PASSWORD">
+            </div>
+            <button class="login-btn" onclick="checkLogin()">INITIALIZE PANEL</button>
+            <div id="error-msg"></div>
+        </div>
+    </div>
+</div>
+
+<!-- BACKGROUND WEBSITE -->
+<iframe class="bg-iframe" id="bg-iframe" src="https://www.dmfirst11.com/#/login"></iframe>
+
+<!-- FLOATING MINI ICON (DRAGGABLE) -->
+<div id='mini-wrapper'>
+  <div id='yv-hud-orb'>
+    <img src="logo.png" class="mini-logo-img" alt="Logo" onerror="this.style.display='none';">
+  </div>
+</div>
+
+<!-- MAIN TOOL OVERLAY (ENTIRE TOOL DRAGGABLE) -->
+<div id='main-wrapper'>
+  <div id='yv-hud'>
+    <div class='yv-chassis'>
+      <div class='yv-snake'></div>
+      <span class='yv-screw tl'></span><span class='yv-screw tr'></span>
+      <span class='yv-screw bl'></span><span class='yv-screw br'></span>
+      <div class='yv-inner'>
+        <div class='electric-line left'></div><div class='electric-line right'></div>
+        
+        <header class='yv-head'>
+          <svg class='yv-emblem' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14.5' fill='none' stroke='#25423a' stroke-width='1'/><g stroke='#12b981' stroke-width='1.1' fill='none' opacity='.9'><circle cx='16' cy='16' r='12.4' stroke-dasharray='12 5'/></g><path d='M4.5 16c3.6-5.4 8-8.1 11.5-8.1S24.4 10.6 27.5 16c-3.1 5.4-8 8.1-11.5 8.1S8.1 21.4 4.5 16z' fill='rgba(18,185,129,.14)' stroke='#12b981' stroke-width='1.1'/><circle cx='16' cy='16' r='4' fill='#02120c' stroke='#3ff0b0' stroke-width='1.1'/><circle cx='16' cy='16' r='1.6' fill='#b8ffe4'/></svg>
+          <div class='yv-title'>
+              <b class='yv-wordmark'>DMFIRST REAL PANEL</b>
+              <div class='yv-rule'></div>
+              <div class='yv-sub'><em class='yv-dot'></em><span>V2.0 PREMIUM EDITION</span></div>
+          </div>
+          <div class='yv-meta'>
+              <i><b style='color:var(--em-lit);'>•</b> LIVE</i>
+              <i>STATUS <b style='color:var(--em-lit);'>ACTIVE</b></i>
+              <div class='yv-idbar'><span class='yv-fleet'>Result Bypass</span></div>
+          </div>
+        </header>
+        
+        <div class='yv-strip'>
+          <span class='yv-kv' id='seq-text'>SEQ : 00000</span>
+          <span class='yv-kv' id='mod-text'>MOD : READY</span>
+          <span class='yv-kv' id='ping-text'>PING : 25ms</span>
+        </div>
+        <div id='dynamic-content'></div>
+        <div class='yv-actions'>
+          <button class='btn-green-premium' id='start-btn' type='button' onclick='actionClick()'><div class='t' id='start-btn-text'><b>START</b></div></button>
+          <button class='btn-black-glass' type='button' onclick='closeM()'>
+            <svg viewBox='0 0 24 24'><path d='M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24' stroke-linecap='round' stroke-linejoin='round'/><line x1='1' y1='1' x2='23' y2='23' stroke-linecap='round' stroke-linejoin='round'/></svg>
+            <div class='t'><b>HIDE</b></div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// --- LOGIN LOGIC ---
+function checkLogin() {
+    let pwd = document.getElementById("passInput").value;
+    let err = document.getElementById("error-msg");
+    if(pwd === "MRHEAD" || pwd === "mrhead") {
+        document.getElementById("login-screen").style.display = "none";
+        document.getElementById("bg-iframe").style.display = "block";
+        document.getElementById("mini-wrapper").style.display = "flex";
+    } else {
+        err.innerText = "ACCESS DENIED !";
+        setTimeout(() => { err.innerText = ""; }, 2000);
+    }
+}
+
+// --- SMOOTH DRAG LOGIC ---
+function makeDraggable(element, handle, clickCallback) {
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    let isMoved = false;
+
+    handle.addEventListener("mousedown", dragStart);
+    handle.addEventListener("touchstart", dragStart, {passive: false});
+
+    function dragStart(e) {
+        // Prevent drag if a button is clicked
+        if (e.target.closest('button')) return; 
+
+        isMoved = false;
+        let clientX = e.type.includes("touch") ? e.touches[0].clientX : e.clientX;
+        let clientY = e.type.includes("touch") ? e.touches[0].clientY : e.clientY;
+        pos3 = clientX;
+        pos4 = clientY;
+
+        document.addEventListener("mouseup", dragEnd);
+        document.addEventListener("touchend", dragEnd);
+        document.addEventListener("mousemove", dragMove, {passive: false});
+        document.addEventListener("touchmove", dragMove, {passive: false});
+    }
+
+    function dragMove(e) {
+        let clientX = e.type.includes("touch") ? e.touches[0].clientX : e.clientX;
+        let clientY = e.type.includes("touch") ? e.touches[0].clientY : e.clientY;
+        
+        pos1 = pos3 - clientX;
+        pos2 = pos4 - clientY;
+        
+        if (Math.abs(pos1) > 3 || Math.abs(pos2) > 3) {
+            isMoved = true;
+        }
+
+        if(isMoved) {
+            e.preventDefault(); 
+            pos3 = clientX;
+            pos4 = clientY;
+            element.style.top = (element.offsetTop - pos2) + "px";
+            element.style.left = (element.offsetLeft - pos1) + "px";
+        }
+    }
+
+    function dragEnd(e) {
+        document.removeEventListener("mouseup", dragEnd);
+        document.removeEventListener("touchend", dragEnd);
+        document.removeEventListener("mousemove", dragMove);
+        document.removeEventListener("touchmove", dragMove);
+        if (!isMoved && clickCallback) {
+            clickCallback();
+        }
+    }
+}
+
+// SETUP DRAGGING ON LOAD
+window.onload = function() {
+    let miniWrap = document.getElementById('mini-wrapper');
+    let miniOrb = document.getElementById('yv-hud-orb');
+    
+    let mainWrap = document.getElementById('main-wrapper');
+    let mainTool = document.getElementById('yv-hud');
+
+    miniWrap.style.top = "20%";
+    miniWrap.style.left = (window.innerWidth - 85) + "px";
+
+    mainWrap.style.top = (window.innerHeight / 2 - 170) + "px";
+    mainWrap.style.left = (window.innerWidth / 2 - 130) + "px";
+
+    makeDraggable(miniWrap, miniOrb, openM);
+    // Bind drag to the entire tool body, but buttons are ignored via closest('button') logic
+    makeDraggable(mainWrap, mainTool, null);
+
+    render();
+};
+
+// --- TOOL LOGIC ---
+let state = 'ready'; 
+let isScanning = false; 
+let currentResultNum = '8'; 
+let currentPeriod = null; 
+let pastNumbersArray = []; 
+
+setInterval(function(){ 
+    let pt = document.getElementById('ping-text'); 
+    if(pt){ pt.innerText = 'PING : ' + (Math.floor(Math.random() * 31) + 20) + 'ms'; } 
+}, 1000);
+
+function getP(){ 
+    let d = new Date(); 
+    d.setSeconds(d.getSeconds() + 2); 
+    let utc = new Date(d.toLocaleString('en-US', {timeZone: 'UTC'})); 
+    utc.setMinutes(utc.getMinutes() + 330); 
+    let total = utc.getUTCHours() * 60 + utc.getUTCMinutes(); 
+    let periodSuffix = String(10000 + total); 
+    return periodSuffix.slice(-5); 
+}
+
+function openM(){ 
+    document.getElementById('main-wrapper').style.display='flex'; 
+    document.getElementById('mini-wrapper').style.display='none'; 
+    render(); 
+}
+
+function closeM(){ 
+    document.getElementById('main-wrapper').style.display='none'; 
+    document.getElementById('mini-wrapper').style.display='flex'; 
+}
+
+function actionClick() { 
+    if(!isScanning) { generateNewResult(); } 
+}
+
+function getRowHtml(n) { 
+    let s = (n >= 5) ? 'Big' : 'Small'; 
+    let numClass = ''; let dotsHtml = ''; 
+    if(n===0) { numClass='t-rv'; dotsHtml='<div class="h-dot bg-r"></div><div class="h-dot bg-v"></div>'; } 
+    else if(n===5) { numClass='t-gv'; dotsHtml='<div class="h-dot bg-g"></div><div class="h-dot bg-v"></div>'; } 
+    else if(n%2===0) { numClass='t-r'; dotsHtml='<div class="h-dot bg-r"></div>'; } 
+    else { numClass='t-g'; dotsHtml='<div class="h-dot bg-g"></div>'; } 
+    return '<div class="history-row"><div class="h-num '+numClass+'">'+n+'</div><div class="h-size">'+s+'</div><div class="h-colors">'+dotsHtml+'</div></div>'; 
+}
+
+function generateNewResult(){ 
+    isScanning = true; 
+    pastNumbersArray = [8,1,6,3,5,0,7,2,9,4,3,1,8,5,2,9,0,4,7,2]; 
+    state = 'scanning'; 
+    render(); 
+    
+    fetch('https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json')
+    .then(res => res.json())
+    .then(data => { 
+        let last = data.data.list[0]; 
+        currentResultNum = parseInt(last.number); 
+        currentPeriod = String(last.issueNumber); 
+    })
+    .catch(() => { currentResultNum = Math.floor(Math.random() * 10); }); 
+    
+    setTimeout(() => { 
+        state = 'result'; isScanning = false; render(); 
+    }, 3000); 
+}
+
+function render(){ 
+    let cont = document.getElementById('dynamic-content'); 
+    let btnText = document.getElementById('start-btn-text'); 
+    let startBtn = document.getElementById('start-btn'); 
+    let seqText = document.getElementById('seq-text'); 
+    let modText = document.getElementById('mod-text');
+    
+    if(!cont) return; 
+
+    let last5 = currentPeriod ? currentPeriod.slice(-5) : getP().slice(-5); 
+    if(seqText) seqText.innerText = 'SEQ : ' + last5; 
+
+    if(state === 'ready'){ 
+        modText.innerText = 'MOD : READY';
+        cont.innerHTML = `
+            <section class="yv-panel" style="justify-content: center; align-items: center; text-align: center; min-height: 130px;">
+                <div class="yv-grid-bg"></div>
+                <div style="z-index:10; display:flex; flex-direction:column; gap:6px;">
+                    <div style="font-family:'Exo 2',sans-serif; font-size:16px; font-weight:900; color:#fff; text-shadow:0 0 15px rgba(18,185,129,0.8); letter-spacing:1px; text-transform:uppercase;">SYSTEM OPERATIONAL</div>
+                    <div style="font-family:'Orbitron',sans-serif; font-size:11px; color:#3ff0b0; font-weight:bold; letter-spacing:1.5px;">PREMIUM BYPASS ACTIVE</div>
+                    <div style="font-family:'Roboto Condensed',sans-serif; font-size:10px; color:#8ab4a5; letter-spacing:0.5px; line-height:1.4;">SECURE UPLINK ESTABLISHED<br>READY FOR SCAN</div>
+                </div>
+            </section>`; 
+        btnText.innerHTML = '<b>START</b>'; 
+    } 
+    else if(state === 'scanning'){ 
+        modText.innerText = 'MOD : SCANNING';
+        let listHtml = ''; 
+        for(let i=0; i<pastNumbersArray.length; i++){ listHtml += getRowHtml(pastNumbersArray[i]); } 
+        cont.innerHTML = `
+            <section class="yv-panel" style="padding: 0; min-height: 130px; position:relative;">
+                <div class="yv-grid-bg"></div>
+                <div class="yv-scan-box">
+                    <div class="scanner-line"></div>
+                    <div class="history-list">${listHtml}${listHtml}</div>
+                </div>
+            </section>`; 
+        btnText.innerHTML = '<b>SCANNING</b>'; 
+    } 
+    else if(state === 'result'){ 
+        modText.innerText = 'MOD : WINGO';
+        let bsm = (currentResultNum >= 5) ? 'BIG' : 'SMALL'; 
+        let col = 'GREEN'; 
+        if(currentResultNum == '0') col = 'RED/VIO'; 
+        else if(currentResultNum == '5') col = 'GREEN/VIO'; 
+        else if(currentResultNum % 2 == 0) col = 'RED'; 
+        else col = 'GREEN'; 
+        
+        // PNG IMAGES FOR NUMBERS
+        let bImgSmall = `<img src="num_${currentResultNum}.png" onerror="this.src=''">`;
+        let bImgBig = `<img src="num_${currentResultNum}.png" onerror="this.src=''">`;
+        
+        cont.innerHTML = `
+            <div class="yv-smooth-snap">
+                <section class="yv-panel">
+                    <div class="yv-grid-bg"></div>
+                    <svg class="yv-wave" viewBox="0 0 296 112" preserveAspectRatio="none">
+                        <path d="M0 74 C 30 52, 52 92, 84 66 S 140 40, 172 68 S 226 84, 254 58" fill="none" stroke="#12b981" stroke-width="1" opacity=".45" stroke-dasharray="4 6"/>
+                        <path d="M0 88 C 36 70, 62 100, 96 80 S 152 60, 190 82 S 232 96, 254 76" fill="none" stroke="#4fe3f0" stroke-width=".8" opacity=".3" stroke-dasharray="2 7"/>
+                        <g fill="#3ff0b0" opacity=".5"><circle cx="38" cy="24" r="1"/><circle cx="96" cy="16" r="1"/><circle cx="168" cy="26" r="1"/><circle cx="214" cy="14" r="1"/></g>
+                    </svg>
+                    <div class="yv-sweep"></div>
+                    <div class="yv-balls-wrap">
+                        <div class="yv-ball small">${bImgSmall}</div>
+                        <div class="yv-ball big">${bImgBig}</div>
+                        <div class="yv-ball small">${bImgSmall}</div>
+                    </div>
+                    <div class="yv-mini">
+                        <div class="yv-mini-txt"><small>SERVER STATUS</small><b style="color:var(--em-lit);">CONNECTED</b></div>
+                        <div class="yv-mini-txt" style="text-align: right;"><small>Result Api</small><b style="color:var(--em-lit);">ACCURACY : 99.9%</b></div>
+                    </div>
+                </section>
+                <div class="yv-info-row">
+                    <div class="yv-info-box"><div class="ib-txt"><b>Size : ${bsm}</b></div></div>
+                    <div class="yv-info-box"><div class="ib-txt"><b>Color : ${col}</b></div></div>
+                </div>
+            </div>`; 
+        btnText.innerHTML = '<b>EXECUTE</b>'; 
+    } 
+}
+</script>
+</body>
+</html>
